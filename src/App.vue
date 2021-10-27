@@ -1,17 +1,57 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+      <div>
+        <h3>Let us test your arithmetic.</h3>
+        <p>What is the sum of the two numbers?</p>
+        <div class="inline">
+          <p>{{ x1 }} + {{ x2 }} =</p> <input v-model="guess"> <button v-on:click="check">Check Answer</button>
+        </div>
+        <button v-on:click="refresh">Refresh</button>
+        <button id ="buttonId" @click="clickMe">HIFI</button>
+        <p>{{message}}</p>
+      </div>
+      <div>
+        <input  v-model.number="x"  @change="checkFruit()" />
+        <input v-model.number="y"  @change="checkFruit()"/>
+        <div>
+       {{myFruit}}
+        </div>
+      </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      x1: Math.ceil(Math.random() * 100),
+      x2: Math.ceil(Math.random() * 100),
+      guess: "",
+      message: "a",
+      myFruit:"",
+      x:0,
+      y:0,
+    }
+  },
+  methods: {
+    check() {
+      if (this.x1 + this.x2 === parseInt(this.guess)) {
+        this.message = "SUCCESS!"
+      } else {
+        this.message = "TRY AGAIN"
+      }
+    },
+    refresh() {
+      this.x1 = Math.ceil(Math.random() * 100);
+      this.x2 = Math.ceil(Math.random() * 100);
+    },
+    clickMe:function(){
+      this.message="HIFI"
+    },
+    checkFruit:function( ){
+      this.myFruit=this.x + this.y;
+    }
   }
 }
 </script>
@@ -24,5 +64,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.inline * {
+  display: inline-block;
+}
+img {
+  height: 350px;
 }
 </style>
